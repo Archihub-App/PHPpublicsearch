@@ -1,0 +1,1 @@
+# Interfaz PHP para consulta pública del contenido de ArchiHUB
