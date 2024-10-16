@@ -3,3 +3,16 @@ body {
     margin: 0;
     padding: 0;
 }
+
+.searchBar {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.searchBar input {
+    width: 300px;
+    height: 30px;
+    font-size: 16px;
+    padding: 5px;
+}

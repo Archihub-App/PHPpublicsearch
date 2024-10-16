@@ -1,23 +1,43 @@
 <?php require "./components/header.php"; ?>
 
 <?php
-// Verificar si el formulario fue enviado y si el campo de búsqueda no está vacío
-if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
-    // Obtener el término de búsqueda
-    $searchTerm = $_POST['search'];
-    // Escapar el término de búsqueda para evitar inyección de SQL
-    $searchTerm = htmlspecialchars($searchTerm);
-    ?>
 
-    <form action="submit_search.php" method="post">
-        <input type="text" name="search" placeholder="Buscar" value="<?php echo $searchTerm ?>">
-    </form>
+$searchView = true;
+require "./components/searchInput.php";
 
-    <?php
+$url = $urlBackend;
+$authToken = $apiToken;
+$body = [
+    "search" => $searchTerm
+];
+$headers = [
+    "Authorization: $authToken",
+    "Content-Type: application/json",
+];
+
+$ch = curl_init($url);
+
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($ch, CURLOPT_VERBOSE, true);
+curl_setopt($ch, CURLOPT_STDERR, $verboseHandle);
+
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
+
+$response = curl_exec($ch);
+
+if (curl_errno($ch)) {
+    echo 'Error:' . curl_error($ch);
 } else {
-    // Si no se proporcionó un término de búsqueda, mostrar un mensaje de error
-    echo "No se proporcionó un término de búsqueda.";
+    echo $response;
 }
+
+
+
+curl_close($ch);
 ?>
 
 <?php require "./components/footer.php"; ?>

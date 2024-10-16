@@ -1,7 +1,10 @@
 <?php require "./components/header.php"; ?>
 
-<form action="submit_search.php" method="post">
-    <input type="text" name="search" placeholder="Buscar">
-</form>
+<?php
+
+$searchView = false;
+require "./components/searchInput.php";
+
+?>
 
 <?php require "./components/footer.php"; ?>
