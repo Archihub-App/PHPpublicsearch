@@ -1,3 +1,4 @@
+<?php require __DIR__ . '/../utils/functions.php'; ?>
 <?php
 $envPath = __DIR__ . '/.env';
 
