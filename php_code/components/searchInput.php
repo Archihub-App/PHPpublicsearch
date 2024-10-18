@@ -5,13 +5,28 @@
         $authToken = $apiToken;
         $response_types = getRequest($url, $authToken);
         $response_types = json_decode($response_types, true);
-        echo '<select name="responseType">';
-        foreach ($response_types as $type) {
-            $name = $type['name'];
-            $slug = $type['slug'];
-            echo "<option value=\"$slug\">$name</option>";
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['responseType'])) {
+            $responseType = $_POST['responseType'];
+            echo "<select name='responseType' value='$responseType'>";
+            foreach ($response_types as $type) {
+                $name = $type['name'];
+                $slug = $type['slug'];
+                if ($slug == $responseType) {
+                    echo "<option value=\"$slug\" selected>$name</option>";
+                } else {
+                    echo "<option value=\"$slug\">$name</option>";
+                }
+            }
+            echo '</select>';
+        } else {
+            echo '<select name="responseType" value="">';
+            foreach ($response_types as $type) {
+                $name = $type['name'];
+                $slug = $type['slug'];
+                echo "<option value=\"$slug\">$name</option>";
+            }
+            echo '</select>';
         }
-        echo '</select>';
         ?>
         <?php
         // Verificar si el formulario fue enviado y si el campo de búsqueda no está vacío
@@ -26,8 +41,9 @@
 
             <?php
         } else if ($searchView) {
-            // Si no se proporcionó un término de búsqueda, mostrar un mensaje de error
-            echo "No se proporcionó un término de búsqueda.";
+            ?>
+            <input type="text" name="search" placeholder="Buscar" value="<?php echo $searchTerm ?>">
+            <?php
         }
 
         if (!$searchView) {
@@ -36,5 +52,7 @@
             <?php
         }
         ?>
+
+        <button type="submit">Buscar</button>
     </form>
 </nav>

@@ -1,5 +1,6 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Chakra Petch", sans-serif;
+    font-weight: 400;
     margin: 0;
     padding: 0;
 }
@@ -8,11 +9,84 @@ body {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    border-bottom: 1px solid #ccc;
 }
 
+.searchBar form {
+    max-width: 699px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    border: 1px solid #ccc;
+    border-bottom: none;
+}
+
+
+
 .searchBar input {
-    width: 300px;
+    width: calc(100% - 10px);
+    outline: none;
     height: 30px;
     font-size: 16px;
     padding: 5px;
+    font-family: "Chakra Petch", sans-serif;
+    border: none;
+    text-align: center;
+    position: relative;
+}
+
+.searchBar select {
+    width: 100%;
+    font-size: 16px;
+    font-family: "Chakra Petch", sans-serif;
+    border: none;
+    outline: none;
+}
+
+.searchBar button {
+    border: none;
+    background-color: #333;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.searchBar button:hover {
+    background-color: #555;
+}
+
+.listItem {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: none;
+    vertical-align: middle;
+    text-decoration: none;
+    color: #999;
+    background-color: white;
+    transition: all 0.15s;
+}
+
+.listItem > div {
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    /* border-bottom: none; */
+    border-right: none;
+    border-top: none;
+}
+
+.listItem:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.resultsContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    flex-direction: column;
+    align-items: center;
+    max-width: 700px;
+    margin: 0 auto;
+    border-right: 1px solid #ccc;
 }
